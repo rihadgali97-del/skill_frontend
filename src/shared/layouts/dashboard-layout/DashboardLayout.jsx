@@ -17,7 +17,7 @@ const navGroups = [
   {
     label: 'Administration',
     items: [
-      { label: 'My Profile', path: '/dashboard/profile',    icon: '👤', permission: null },
+      { label: 'My Profile', path: '/dashboard/profile',   icon: '🧑', permission: null },
       { label: 'Users',      path: '/dashboard/users',      icon: '👤', permission: 'users:read' },
       { label: 'Roles',      path: '/dashboard/roles',      icon: '🔑', permission: 'roles:read' },
       { label: 'Audit Logs', path: '/dashboard/audit-logs', icon: '📋', permission: 'audit:read' },
@@ -51,27 +51,32 @@ const navGroups = [
 ];
 
 const DashboardLayout = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen]  = useState(true);
   const { user, logout } = useAuth();
-  const { can } = usePermissions();
-
+  const { can }          = usePermissions();
   const initials = `${user?.firstName?.[0] || ''}${user?.lastName?.[0] || ''}`;
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
 
       {/* ── Sidebar ─────────────────────────────────────────────────────────── */}
-      <aside className={`${open ? 'w-64' : 'w-16'} flex-shrink-0 bg-[#0d1f2d] flex flex-col transition-all duration-300`}>
+      <aside className={`${open ? 'w-64' : 'w-16'} flex-shrink-0 bg-[#0a0f1e] flex flex-col transition-all duration-300`}>
 
         {/* Logo */}
         <div className="h-16 flex items-center px-4 border-b border-white/10 flex-shrink-0">
           {open ? (
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#00d4d4]/20 border border-[#00d4d4]/40 flex items-center justify-center text-[#00d4d4] font-bold text-sm flex-shrink-0">S</div>
-              <span className="text-lg font-bold text-white tracking-tight">Skilva<span className="text-[#00d4d4]">Tech</span></span>
+              <div className="w-8 h-8 rounded-lg bg-[#f5a623]/20 border border-[#f5a623]/40 flex items-center justify-center text-[#f5a623] font-bold text-sm flex-shrink-0">
+                S
+              </div>
+              <span className="text-lg font-bold text-white tracking-tight">
+                Skillva<span className="text-[#f5a623]">Tech</span>
+              </span>
             </div>
           ) : (
-            <div className="w-8 h-8 rounded-lg bg-[#00d4d4]/20 border border-[#00d4d4]/40 flex items-center justify-center text-[#00d4d4] font-bold text-sm mx-auto">S</div>
+            <div className="w-8 h-8 rounded-lg bg-[#f5a623]/20 border border-[#f5a623]/40 flex items-center justify-center text-[#f5a623] font-bold text-sm mx-auto">
+              S
+            </div>
           )}
         </div>
 
@@ -95,7 +100,7 @@ const DashboardLayout = () => {
                     className={({ isActive }) =>
                       `flex items-center gap-3 px-3 py-2.5 rounded-xl mb-0.5 text-sm font-medium transition-all
                        ${isActive
-                         ? 'bg-[#00d4d4] text-white'
+                         ? 'bg-[#f5a623] text-[#0a0f1e]'
                          : 'text-white/60 hover:text-white hover:bg-white/10'
                        }`
                     }
@@ -109,32 +114,36 @@ const DashboardLayout = () => {
           })}
         </nav>
 
-        {/* User — clickable avatar links to profile */}
+        {/* User */}
         <div className="p-3 border-t border-white/10 flex-shrink-0">
           {open ? (
             <div className="flex items-center gap-3 p-2">
               <Link to="/dashboard/profile"
-                className="w-8 h-8 rounded-full bg-[#00d4d4] flex items-center justify-center text-xs font-bold text-white flex-shrink-0 hover:ring-2 hover:ring-[#00d4d4]/60 transition-all">
+                className="w-8 h-8 rounded-full bg-[#f5a623] flex items-center justify-center text-xs font-bold text-[#0a0f1e] flex-shrink-0 hover:ring-2 hover:ring-[#f5a623]/60 transition-all overflow-hidden">
                 {user?.avatar
                   ? <img src={user.avatar} alt="" className="w-full h-full rounded-full object-cover" />
                   : initials
                 }
               </Link>
               <div className="flex-1 min-w-0">
-                <Link to="/dashboard/profile" className="text-sm font-medium text-white truncate hover:text-[#00d4d4] transition-colors block">
+                <Link to="/dashboard/profile" className="text-sm font-medium text-white truncate hover:text-[#f5a623] transition-colors block">
                   {user?.firstName} {user?.lastName}
                 </Link>
                 <p className="text-xs text-white/40 truncate capitalize">{user?.role?.name}</p>
               </div>
-              <button onClick={logout} title="Logout" className="text-white/40 hover:text-red-400 transition-colors flex-shrink-0 text-sm">⏻</button>
+              <button onClick={logout} title="Logout"
+                className="text-white/40 hover:text-red-400 transition-colors flex-shrink-0 text-sm">
+                ⏻
+              </button>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <Link to="/dashboard/profile"
-                className="w-8 h-8 rounded-full bg-[#00d4d4] flex items-center justify-center text-xs font-bold text-white hover:ring-2 hover:ring-[#00d4d4]/60 transition-all">
+                className="w-8 h-8 rounded-full bg-[#f5a623] flex items-center justify-center text-xs font-bold text-[#0a0f1e] hover:ring-2 hover:ring-[#f5a623]/60 transition-all">
                 {initials}
               </Link>
-              <button onClick={logout} className="text-white/40 hover:text-red-400 transition-colors text-sm">⏻</button>
+              <button onClick={logout}
+                className="text-white/40 hover:text-red-400 transition-colors text-sm">⏻</button>
             </div>
           )}
         </div>
@@ -145,31 +154,30 @@ const DashboardLayout = () => {
 
         {/* Topbar */}
         <header className="h-16 flex-shrink-0 bg-white border-b border-gray-200 flex items-center px-6 gap-4 shadow-sm">
-          <button onClick={() => setOpen(!open)} className="text-gray-400 hover:text-[#00b3b3] transition-colors text-lg">
+          <button onClick={() => setOpen(!open)}
+            className="text-gray-400 hover:text-[#e8940a] transition-colors text-lg">
             ☰
           </button>
-
-          {/* Global search */}
           <div className="flex-1">
             <GlobalSearch />
           </div>
-
           <div className="flex items-center gap-3">
             <NotificationBell />
             <div className="w-px h-6 bg-gray-200" />
             <NavLink to="/dashboard/settings"
               className={({ isActive }) =>
                 `w-8 h-8 flex items-center justify-center rounded-xl transition-colors text-sm
-                 ${isActive ? 'bg-[#00d4d4]/10 text-[#008080]' : 'text-gray-400 hover:text-[#00b3b3] hover:bg-gray-100'}`
+                 ${isActive ? 'bg-[#f5a623]/10 text-[#c47a08]' : 'text-gray-400 hover:text-[#e8940a] hover:bg-gray-100'}`
               }
               title="Settings">
               ⚙️
             </NavLink>
             <div className="w-px h-6 bg-gray-200" />
-            <span className="text-sm text-gray-500 hidden sm:block">{user?.firstName} {user?.lastName}</span>
-            {/* Clickable avatar → profile page */}
+            <span className="text-sm text-gray-500 hidden sm:block">
+              {user?.firstName} {user?.lastName}
+            </span>
             <Link to="/dashboard/profile"
-              className="w-8 h-8 rounded-full bg-[#00d4d4] flex items-center justify-center text-xs font-bold text-white hover:ring-2 hover:ring-[#00d4d4]/40 transition-all overflow-hidden"
+              className="w-8 h-8 rounded-full bg-[#f5a623] flex items-center justify-center text-xs font-bold text-[#0a0f1e] hover:ring-2 hover:ring-[#f5a623]/40 transition-all overflow-hidden"
               title="My Profile">
               {user?.avatar
                 ? <img src={user.avatar} alt="" className="w-full h-full object-cover" />

@@ -14,17 +14,35 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex bg-white">
       {/* Left panel */}
-      <div className="hidden lg:flex w-1/2 bg-[#0d1f2d] flex-col items-center justify-center p-12">
-        <div className="max-w-sm text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-[#00d4d4]/20 border border-[#00d4d4]/30 mb-6">
-            <span className="text-4xl font-bold text-[#00d4d4]">S</span>
+      <div className="hidden lg:flex w-1/2 bg-[#0a0f1e] flex-col items-center justify-center p-12 relative overflow-hidden">
+        {/* Background decorative circles */}
+        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-[#f5a623]/5 blur-2xl" />
+        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-[#6b4fa0]/10 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-[#f5a623]/3 blur-3xl" />
+
+        <div className="max-w-sm text-center relative z-10">
+          {/* Logo placeholder — replace with actual logo img tag */}
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-[#f5a623]/20 border border-[#f5a623]/30 mb-6">
+            <span className="text-5xl font-bold text-[#f5a623]">S</span>
           </div>
           <h1 className="text-3xl font-bold text-white mb-3">
-            Skilva<span className="text-[#00d4d4]">Tech</span>
+            Skillva<span className="text-[#f5a623]">Tech</span>
           </h1>
+          <p className="text-white/40 text-xs uppercase tracking-widest mb-6">
+            Skills Today. Innovation Tomorrow.
+          </p>
           <p className="text-white/50 text-sm leading-relaxed">
             Your all-in-one platform for managing courses, clients, services and projects.
           </p>
+
+          {/* Feature pills */}
+          <div className="flex flex-wrap justify-center gap-2 mt-8">
+            {['CRM', 'LMS', 'Invoices', 'Analytics', 'Services'].map((f) => (
+              <span key={f} className="px-3 py-1 rounded-full text-xs font-medium bg-[#f5a623]/10 border border-[#f5a623]/20 text-[#f5a623]">
+                {f}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -34,7 +52,7 @@ const LoginPage = () => {
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
             <span className="text-2xl font-bold text-gray-900">
-              Skilva<span className="text-[#00d4d4]">Tech</span>
+              Skillva<span className="text-[#f5a623]">Tech</span>
             </span>
           </div>
 
@@ -53,14 +71,15 @@ const LoginPage = () => {
               <input name="email" type="email" required value={form.email} onChange={handleChange}
                 placeholder="you@company.com"
                 className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-900
-                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00d4d4]/40
-                           focus:border-[#00d4d4] transition-all shadow-sm" />
+                           placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f5a623]/30
+                           focus:border-[#f5a623] transition-all shadow-sm" />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="block text-sm font-medium text-gray-700">Password</label>
-                <Link to={ROUTES.FORGOT_PASSWORD} className="text-xs text-[#00b3b3] hover:text-[#008080] transition-colors">
+                <Link to={ROUTES.FORGOT_PASSWORD}
+                  className="text-xs text-[#e8940a] hover:text-[#c47a08] transition-colors">
                   Forgot password?
                 </Link>
               </div>
@@ -68,8 +87,8 @@ const LoginPage = () => {
                 <input name="password" type={showPassword ? 'text' : 'password'} required
                   value={form.password} onChange={handleChange} placeholder="••••••••"
                   className="w-full px-4 py-3 pr-16 rounded-xl bg-white border border-gray-300 text-gray-900
-                             placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00d4d4]/40
-                             focus:border-[#00d4d4] transition-all shadow-sm" />
+                             placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f5a623]/30
+                             focus:border-[#f5a623] transition-all shadow-sm" />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs font-medium">
                   {showPassword ? 'Hide' : 'Show'}
@@ -78,15 +97,16 @@ const LoginPage = () => {
             </div>
 
             <button type="submit" disabled={loading}
-              className="w-full py-3 rounded-xl bg-[#00d4d4] hover:bg-[#00b3b3] text-white font-semibold
+              className="w-full py-3 rounded-xl bg-[#f5a623] hover:bg-[#e8940a] text-[#0a0f1e] font-bold
                          transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm">
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
           <p className="mt-6 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <Link to={ROUTES.REGISTER} className="text-[#00b3b3] hover:text-[#008080] font-medium transition-colors">
+            <Link to={ROUTES.REGISTER}
+              className="text-[#e8940a] hover:text-[#c47a08] font-medium transition-colors">
               Create one
             </Link>
           </p>
